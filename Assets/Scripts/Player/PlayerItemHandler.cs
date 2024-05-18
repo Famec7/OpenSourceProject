@@ -15,11 +15,12 @@ public class PlayerItemHandler : MonoBehaviour
     
     private void UseItem(ItemEffectBase itemEffect)
     {
-        itemEffect.Activate(_data);
-        _activeItems.Add(itemEffect);
-        StartCoroutine(IE_DeactivateItem(itemEffect));
+        itemEffect.Activate(_data); // 아이템 효과 활성화
+        _activeItems.Add(itemEffect); // 활성화된 아이템 리스트에 추가
+        StartCoroutine(IE_DeactivateItem(itemEffect)); // 지속시간 이후 아이템 비활성화
     }
     
+    // 아이템 비활성화 코루틴 (지속시간 이후 아이템 비활성화)
     private IEnumerator IE_DeactivateItem(ItemEffectBase itemEffect)
     {
         yield return new WaitForSeconds(itemEffect.ItemData.duration);
