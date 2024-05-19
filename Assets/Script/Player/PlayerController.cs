@@ -3,6 +3,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     private PlayerData _playerData = null;
+    private Animator _animator;
 
     private Rigidbody2D _rigidbody2D;
     public float jumpForce = 10.0f; // 점프 힘 - 점프 힘과 RigidBody 2D의 Gravity Scale 값을 조정하여 점프 조정 가능
@@ -16,9 +17,12 @@ public class PlayerController : MonoBehaviour
     public Vector2 slidingColliderSize;
     public Vector2 slidingColliderOffset;
 
+    private bool _isJump = false;
+
     private void Start()
     {
         _playerData = DataManager.Instance.LoadData();
+        _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
 
         _collider = GetComponent<BoxCollider2D>();
@@ -32,19 +36,23 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKey(KeyCode.LeftShift) && !_isSliding)
-        {
-            StartSlide();
-        }
-        else if (Input.GetKeyUp(KeyCode.LeftShift) && _isSliding)
-        {
-            StopSlide();
-        }
-
         if (Input.GetButtonDown("Jump") && _jumpCount < _maxJumpCount)
         {
             _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
             _jumpCount++;
+            _isJump = true;
+            _animator.SetBool("Jump", true);
+        }
+
+        if (Input.GetKey(KeyCode.LeftShift) && !_isSliding &&!_isJump)
+        {
+            StartSlide();
+            _animator.SetBool("Slide", true);
+        }
+        else if (Input.GetKeyUp(KeyCode.LeftShift) && _isSliding)
+        {
+            _animator.SetBool("Slide", false);
+            StopSlide();
         }
     }
 
@@ -66,7 +74,9 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
+            _animator.SetBool("Jump", false);
             _jumpCount = 0; // 땅에 닿으면 점프 카운트 초기화
+            _isJump = false;
         }
     }
 }
