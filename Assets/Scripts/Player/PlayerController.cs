@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -7,18 +8,18 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private BoxCollider2D _collider;
 
-    // Á¡ÇÁ °ü·Ã º¯¼ö
-    public float jumpForce = 10.0f;  // Á¡ÇÁ ½Ã Àû¿ëµÉ Èû - Á¡ÇÁ Èû°ú RigidBody 2DÀÇ Gravity Scale °ªÀ» Á¶Á¤ÇÏ¿© Á¡ÇÁ Á¶Á¤ °¡´É   
-    private int _jumpCount = 0;      // ÇöÀç Á¡ÇÁ È½¼ö
-    private int _maxJumpCount = 2;   // ÃÖ´ë Á¡ÇÁ È½¼ö (´õºí Á¡ÇÁ)
+    // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+    public float jumpForce = 10.0f;  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ - ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ RigidBody 2Dï¿½ï¿½ Gravity Scale ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½   
+    private int _jumpCount = 0;      // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½
+    private int _maxJumpCount = 2;   // ï¿½Ö´ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 
-    // ÄÝ¶óÀÌ´õ Å©±â ¹× ¿ÀÇÁ¼Â
+    // ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     private Vector2 _standingColliderSize;
     private Vector2 _standingColliderOffset;
-    public Vector2 slidingColliderSize;     // ½½¶óÀÌµù ½Ã ÄÝ¶óÀÌ´õ Å©±â
-    public Vector2 slidingColliderOffset;   // ½½¶óÀÌµù ½Ã ÄÝ¶óÀÌ´õ ¿ÀÇÁ¼Â
+    public Vector2 slidingColliderSize;     // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ Å©ï¿½ï¿½
+    public Vector2 slidingColliderOffset;   // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-    // ÇÃ·¹ÀÌ¾î »óÅÂ¸¦ ³ªÅ¸³»´Â ¿­°ÅÇü
+    // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ ï¿½ï¿½Å¸ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     enum PlayerState 
     {
         Running,
@@ -26,7 +27,7 @@ public class PlayerController : MonoBehaviour
         Sliding
     }
 
-    private PlayerState _currentState = PlayerState.Running; // ÃÊ±â »óÅÂ´Â Running
+    private PlayerState _currentState = PlayerState.Running; // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½Â´ï¿½ Running
 
     private void Awake()
     {
@@ -38,24 +39,24 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        // ±âÁ¸ ÄÝ¶óÀÌ´õ Å©±â ¹× ¿ÀÇÁ¼Â ÀúÀå
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _standingColliderSize = _collider.size; 
         _standingColliderOffset = _collider.offset; 
 
-        // ½½¶óÀÌµù ½Ã Àû¿ëµÉ ÄÝ¶óÀÌ´õ ¹× ¿ÀÇÁ¼Â ¼³Á¤ (±âÁ¸ Å©±âÀÇ Àý¹Ý)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ý¶ï¿½ï¿½Ì´ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (ï¿½ï¿½ï¿½ï¿½ Å©ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
         slidingColliderSize = new Vector2(_collider.size.x, _collider.size.y / 2);
         slidingColliderOffset = new Vector2(_collider.offset.x, _collider.offset.y - _collider.size.y / 4);
     }
 
     private void Update()
     {
-        // Á¡ÇÁ ÀÔ·Â Ã³¸®
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
         if (Input.GetButtonDown("Jump") && _jumpCount < _maxJumpCount)
         {
             Jump();
         }
 
-        // ½½¶óÀÌµù ÀÔ·Â Ã³¸®
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ô·ï¿½ Ã³ï¿½ï¿½
         if (Input.GetKey(KeyCode.LeftShift) && _currentState == PlayerState.Running)
         {
             StartSlide();
@@ -68,30 +69,30 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        // ½½¶óÀÌµù Áß¿¡ Á¡ÇÁ ½Ã ½½¶óÀÌµùÀ» ÁßÁö
+        // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ß¿ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         if (_currentState == PlayerState.Sliding)
         {
             StopSlide();
         }
 
-        // Á¡ÇÁ ·ÎÁ÷ ¼öÇà
+        // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         _jumpCount++;
         _currentState = PlayerState.Jumping;
-        _animator.SetBool("Jump", true); // Á¡ÇÁ ¾Ö´Ï¸ÞÀÌ¼Ç È°¼ºÈ­
+        _animator.SetBool("Jump", true); // ï¿½ï¿½ï¿½ï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ È°ï¿½ï¿½È­
     }
 
 
-    // ½½¶óÀÌµù »óÅÂ·Î ÀüÈ¯
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½Â·ï¿½ ï¿½ï¿½È¯
     private void StartSlide()
     {
         _currentState = PlayerState.Sliding;
         _collider.size = slidingColliderSize;
         _collider.offset = slidingColliderOffset;
-        _animator.SetBool("Slide", true); // ½½¶óÀÌµù ¾Ö´Ï¸ÞÀÌ¼Ç È°¼ºÈ­
+        _animator.SetBool("Slide", true); // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½Ö´Ï¸ï¿½ï¿½Ì¼ï¿½ È°ï¿½ï¿½È­
     }
 
-    // ½½¶óÀÌµù »óÅÂ ÇØÁ¦
+    // ï¿½ï¿½ï¿½ï¿½ï¿½Ìµï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private void StopSlide()
     {
         _animator.SetBool("Slide", false);
@@ -105,8 +106,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _animator.SetBool("Jump", false);
-            _jumpCount = 0; // ¶¥¿¡ ´êÀ¸¸é Á¡ÇÁ Ä«¿îÆ® ÃÊ±âÈ­
-            _currentState = PlayerState.Running; // ¶¥¿¡ ´êÀ¸¸é »óÅÂ¸¦ RunningÀ¸·Î ÀüÈ¯
+            _jumpCount = 0; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ä«ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
+            _currentState = PlayerState.Running; // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Â¸ï¿½ Runningï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯
         }
     }
 }
