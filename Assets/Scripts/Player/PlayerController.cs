@@ -109,5 +109,11 @@ public class PlayerController : MonoBehaviour
             _jumpCount = 0; // ���� ������ ���� ī��Ʈ �ʱ�ȭ
             _currentState = PlayerState.Running; // ���� ������ ���¸� Running���� ��ȯ
         }
+
+        // 장애물과 충돌 시
+        if (collision.gameObject.CompareTag("Obstacle"))
+        {
+            _playerData.hp -= 1; // player의 hp 감소
+        }
     }
 }
