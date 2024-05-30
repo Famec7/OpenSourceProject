@@ -9,22 +9,22 @@ public class PlayerController : MonoBehaviour
     private Rigidbody2D _rigidbody2D;
     private BoxCollider2D _collider;
 
-    // ���� ���� ����
-    public float jumpForce = 10.0f;  // ���� �� ����� �� - ���� ���� RigidBody 2D�� Gravity Scale ���� �����Ͽ� ���� ���� ����   
-    private int _jumpCount = 0;      // ���� ���� Ƚ��
-    private int _maxJumpCount = 2;   // �ִ� ���� Ƚ�� (���� ����)
+    // 점프 관련 변수
+    public float jumpForce = 10.0f;  // 점프 힘 - 점프 힘과 RigidBody 2D의 Gravity Scale 값을 조정하여 점프 조정 가능   
+    private int _jumpCount = 0;      // 현재 점프 횟수
+    private int _maxJumpCount = 2;   // 최대 점프 횟수 (더블 점프)
 
     // 무적 관련 변수
     public float invincibleTime = 2f; // 무적 시간 (s)
     private bool _isInvincible = false;
 
-    // �ݶ��̴� ũ�� �� ������
+    // 콜라이더 크기 및 오프셋
     private Vector2 _standingColliderSize;
     private Vector2 _standingColliderOffset;
-    public Vector2 slidingColliderSize;     // �����̵� �� �ݶ��̴� ũ��
-    public Vector2 slidingColliderOffset;   // �����̵� �� �ݶ��̴� ������
+    public Vector2 slidingColliderSize;     // 슬라이딩 시 콜라이더 크기
+    public Vector2 slidingColliderOffset;   // 슬라이딩 시 콜라이더 오프셋
 
-    // �÷��̾� ���¸� ��Ÿ���� ������
+    // 플레이어 상태를 나타내는 열거형
     enum PlayerState 
     {
         Running,
@@ -32,7 +32,7 @@ public class PlayerController : MonoBehaviour
         Sliding
     }
 
-    private PlayerState _currentState = PlayerState.Running; // �ʱ� ���´� Running
+    private PlayerState _currentState = PlayerState.Running; // 초기 상태는 Running
 
     private void Awake()
     {
@@ -45,24 +45,24 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
-        // ���� �ݶ��̴� ũ�� �� ������ ����
+        // 기존 콜라이더 크기 및 오프셋 저장
         _standingColliderSize = _collider.size; 
-        _standingColliderOffset = _collider.offset; 
+        _standingColliderOffset = _collider.offset;
 
-        // �����̵� �� ����� �ݶ��̴� �� ������ ���� (���� ũ���� ����)
+        // 슬라이딩 시 적용될 콜라이더 및 오프셋 설정 (기존 크기의 절반)
         slidingColliderSize = new Vector2(_collider.size.x, _collider.size.y / 2);
         slidingColliderOffset = new Vector2(_collider.offset.x, _collider.offset.y - _collider.size.y / 4);
     }
 
     private void Update()
     {
-        // ���� �Է� ó��
+        // 점프 입력 처리
         if (Input.GetButtonDown("Jump") && _jumpCount < _maxJumpCount)
         {
             Jump();
         }
 
-        // �����̵� �Է� ó��
+        // 슬라이딩 입력 처리
         if (Input.GetKey(KeyCode.LeftShift) && _currentState == PlayerState.Running)
         {
             StartSlide();
@@ -75,30 +75,30 @@ public class PlayerController : MonoBehaviour
 
     private void Jump()
     {
-        // �����̵� �߿� ���� �� �����̵��� ����
+        // 슬라이딩 중에 점프 시 슬라이딩 중지
         if (_currentState == PlayerState.Sliding)
         {
             StopSlide();
         }
 
-        // ���� ���� ����
+        // 점프 로직 수행
         _rigidbody2D.velocity = new Vector2(_rigidbody2D.velocity.x, jumpForce);
         _jumpCount++;
         _currentState = PlayerState.Jumping;
-        _animator.SetBool("Jump", true); // ���� �ִϸ��̼� Ȱ��ȭ
+        _animator.SetBool("Jump", true); // 점프 애니메이션 활성화
     }
 
 
-    // �����̵� ���·� ��ȯ
+    // 슬라이딩 상태로 전환
     private void StartSlide()
     {
         _currentState = PlayerState.Sliding;
         _collider.size = slidingColliderSize;
         _collider.offset = slidingColliderOffset;
-        _animator.SetBool("Slide", true); // �����̵� �ִϸ��̼� Ȱ��ȭ
+        _animator.SetBool("Slide", true); // 슬라이딩 애니메이션 활성화
     }
 
-    // �����̵� ���� ����
+    // 슬라이딩 상태 해제
     private void StopSlide()
     {
         _animator.SetBool("Slide", false);
@@ -135,8 +135,8 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Ground"))
         {
             _animator.SetBool("Jump", false);
-            _jumpCount = 0; // ���� ������ ���� ī��Ʈ �ʱ�ȭ
-            _currentState = PlayerState.Running; // ���� ������ ���¸� Running���� ��ȯ
+            _jumpCount = 0; // 땅에 닿으면 점프 카운트 초기화
+            _currentState = PlayerState.Running; // 땅에 닿을 경우 상태를 Running으로 전환
         }
     }
 
