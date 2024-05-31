@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/PlayerMovementTest.unity
-    guid: 503f8116a27a2f746b22f81b1013facb
+    path: Assets/Scenes/HitDetectionTest.unity
+    guid: b4bf0cb477fcb02458b2103bd1178595
   m_configObjects: {}
