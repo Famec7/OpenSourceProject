@@ -7,4 +7,5 @@ public class HpItemData : ItemDataBase
 {
     public int hpAmount;
     public int recoverySpeed;
+
 }
