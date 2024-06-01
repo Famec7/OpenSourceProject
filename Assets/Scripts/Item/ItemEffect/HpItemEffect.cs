@@ -23,12 +23,11 @@ public class HpItemEffect : ItemEffectBase
 
     private IEnumerator IE_RecoveryHp(PlayerData playerData)
     {
-        float _tmp = 0;
+        float finalHp = _hpAmount + playerData.hp;
 
-        while (_tmp <= _hpAmount * 100)
+        while (playerData.hp < finalHp)
         {
-            _tmp += _hpAmount * Time.deltaTime * _recoverySpeed;
-            playerData.hp += _tmp;
+            playerData.hp += _recoverySpeed * Time.deltaTime;
             yield return null;
         }
     }
