@@ -216,7 +216,7 @@ GameObject:
   - component: {fileID: 257246164}
   - component: {fileID: 257246165}
   m_Layer: 0
-  m_Name: Obstacles
+  m_Name: ObstacleGroup
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -230,7 +230,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 257246162}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.3180957, y: 0.1941925, z: -0.05865882}
+  m_LocalPosition: {x: -1.3180957, y: 0.1941925, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2276,6 +2276,60 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1979666766
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1979666767}
+  - component: {fileID: 1979666768}
+  m_Layer: 0
+  m_Name: ObjectPool
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1979666767
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979666766}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1979666768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1979666766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07cfc82637574659b088a580d6d3ea18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _pools:
+  - prefab: {fileID: 1207155880315708090, guid: f42152d357337f649a520bfbfa777161, type: 3}
+    count: 10
+    parent: {fileID: 257246164}
+  - prefab: {fileID: 449330500184937828, guid: a240f2f4c9ecb6a4da233dfa37eb62ce, type: 3}
+    count: 10
+    parent: {fileID: 257246164}
+  - prefab: {fileID: 2560988628159745166, guid: 3f97c4e75158ebf44a3feb9d90359588, type: 3}
+    count: 10
+    parent: {fileID: 257246164}
 --- !u!1 &2033726710
 GameObject:
   m_ObjectHideFlags: 0

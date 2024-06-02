@@ -20,7 +20,6 @@ public class BackgroundScrolling : MonoBehaviour
             _xScreenHalfSize = main.orthographicSize * main.aspect;
 
             _leftLimit = -_xScreenHalfSize * 2;
-            Debug.Log(_leftLimit);
             _rightLimit = _xScreenHalfSize * 2 * backgrounds.Length;
         }
     }
