@@ -2,5 +2,5 @@
 public class PlayerData
 {
     public float speed;
-    public int hp;
+    public float hp;
 }
