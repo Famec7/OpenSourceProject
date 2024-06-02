@@ -4,12 +4,12 @@ using UnityEngine;
 public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     private List<Component> _objectPool;
-    
+
     protected override void Init()
     {
         _objectPool = new List<Component>();
     }
-    
+
     /// <summary>
     /// 오브젝트 풀에 오브젝트 추가
     /// </summary>
@@ -22,34 +22,39 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     {
         for (int i = 0; i < count; i++)
         {
-            Component obj = Instantiate(prefab, Vector3.zero, Quaternion.identity);
+            Component obj = Instantiate(prefab, parent);
             obj.gameObject.SetActive(false);
             obj.transform.SetParent(parent);
             _objectPool.Add(obj);
         }
     }
-    
+
     /// <summary>
     /// 오브젝트 풀에서 사용 가능한 오브젝트를 반환
     /// </summary>
     /// <typeparam name="T"></typeparam>
+    /// <param name="name"> 오브젝트 이름 </param>
+    /// <param name="position"> 위치 </param>
     /// <returns> 컴포넌트로 반환 </returns>
     public T GetObject<T>(string name) where T : Component
     {
         foreach (var obj in _objectPool)
         {
-            if (obj is not (T { gameObject: { activeSelf: false } } t and IPool pool)) continue;
-            if (pool.Name != name) continue;
-            
-            pool.GetFromPool();
-            t.gameObject.SetActive(true);
+            if(obj.TryGetComponent(out T t))
+            {
+                if (t is not ({ gameObject: { activeSelf: false } } and IPool pool)) continue;
+                if (pool.Name != name) continue;
 
-            return t;
+                pool.GetFromPool();
+                t.gameObject.SetActive(true);
+
+                return t;
+            }
         }
-        
+
         return null;
     }
-    
+
     /// <summary>
     /// 오브젝트 풀에 오브젝트 반환
     /// </summary>
@@ -57,21 +62,21 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     public void ReturnObject(Component obj)
     {
         if (obj is not IPool pool) return;
-        
+
         pool.ReturnToPool();
         obj.gameObject.SetActive(false);
     }
-    
+
     public void ClearPool()
     {
         foreach (var obj in _objectPool)
         {
             if (obj is not IPool pool) continue;
-            
+
             pool.ReturnToPool();
             Destroy(obj.gameObject);
         }
-        
+
         _objectPool.Clear();
     }
 }
