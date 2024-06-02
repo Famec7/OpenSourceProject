@@ -20,4 +20,6 @@ public class PlayerData
         }
     }
     public int MaxHp { get; set; }
+
+    public float hp;
 }
