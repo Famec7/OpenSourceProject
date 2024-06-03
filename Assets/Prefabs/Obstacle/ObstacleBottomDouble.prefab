@@ -178,6 +178,7 @@ GameObject:
   m_Component:
   - component: {fileID: 449330500184937828}
   - component: {fileID: 6312745174834716624}
+  - component: {fileID: 107963121798521696}
   m_Layer: 0
   m_Name: ObstacleBottomDouble
   m_TagString: Obstacle
@@ -203,7 +204,7 @@ Transform:
   - {fileID: 2674128699115821304}
   - {fileID: 7119523177386621222}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &6312745174834716624
 BoxCollider2D:
@@ -250,6 +251,19 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.2, y: 3.2}
   m_EdgeRadius: 0
+--- !u!114 &107963121798521696
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2900408061365678020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d2e8def978c34fd79c9c48fe90d6fa01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _name: ObstacleBottomDouble
 --- !u!1 &4939625879448606241
 GameObject:
   m_ObjectHideFlags: 0
