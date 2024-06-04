@@ -1,4 +1,6 @@
 using System;
+using TMPro;
+using System.Collections;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -10,13 +12,19 @@ public class PlayerController : MonoBehaviour
     private BoxCollider2D _collider;
 
     // 점프 관련 변수
-    public float jumpForce = 10.0f;  // 점프 힘 - 점프 힘과 RigidBody 2D의 Gravity Scale 값을 조정하여 점프 조정 가능   
+    public float jumpForce = 10.0f;  // 점프 힘 - 점프 힘과 RigidBody 2D의 Gravity Scale 값을 조정하여 점프 조정 가능
     private int _jumpCount = 0;      // 현재 점프 횟수
     private int _maxJumpCount = 2;   // 최대 점프 횟수 (더블 점프)
 
     // 무적 관련 변수
     public float invincibleTime = 2f; // 무적 시간 (s)
     private bool _isInvincible = false;
+
+    // 거대화 관련 변수
+    private float changeSpeed = 0.1f;   // 플레이어 캐릭터 크기 변화 속도
+    private float originalSize = 1f;    // 플레이어 캐릭터 기본 크기
+    private float giantSize = 2f;       // 플레이어 캐릭터 거대화 크기
+    private bool _isGiant = false;
 
     // 콜라이더 크기 및 오프셋
     private Vector2 _standingColliderSize;
@@ -25,7 +33,7 @@ public class PlayerController : MonoBehaviour
     public Vector2 slidingColliderOffset;   // 슬라이딩 시 콜라이더 오프셋
 
     // 플레이어 상태를 나타내는 열거형
-    enum PlayerState 
+    enum PlayerState
     {
         Running,
         Jumping,
@@ -41,12 +49,15 @@ public class PlayerController : MonoBehaviour
         _animator = GetComponent<Animator>();
         _rigidbody2D = GetComponent<Rigidbody2D>();
         _collider = GetComponent<BoxCollider2D>();
+
+        _playerData.onGiantModeStart += OnGiant;
+        _playerData.onGiantModeStop += OffGiant;
     }
 
     private void Start()
     {
         // 기존 콜라이더 크기 및 오프셋 저장
-        _standingColliderSize = _collider.size; 
+        _standingColliderSize = _collider.size;
         _standingColliderOffset = _collider.offset;
 
         // 슬라이딩 시 적용될 콜라이더 및 오프셋 설정 (기존 크기의 절반)
@@ -130,6 +141,20 @@ public class PlayerController : MonoBehaviour
         _spriteRenderer.color = new Color(1, 1, 1, 1f);
     }
 
+    // 플레이어를 거대화 상태로 전환
+    public void OnGiant()
+    {
+        _isGiant = true;
+        StartCoroutine("Giantize", gameObject);
+    }
+
+    // 플레이어를 거대화 상태에서 원래 상태로 전환
+    public void OffGiant()
+    {
+        _isGiant = false;
+        StartCoroutine("Minimize", gameObject);
+    }
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Ground"))
@@ -145,11 +170,45 @@ public class PlayerController : MonoBehaviour
         // 장애물과 충돌 시
         if (Other.gameObject.CompareTag("Obstacle"))
         {
-            if (_isInvincible == false) // 플레이어가 현재 무적 상태가 아니라면
+            if (_isGiant == true)   // 플레이어가 거대화 상태라면
+            {
+                Other.gameObject.SetActive(false);  // 장애물 파괴
+            }
+            else if (_isInvincible == false) // 플레이어가 현재 무적 상태가 아니라면
             {
                 _playerData.Hp -= 1; // player의 hp 감소
                 OnDamaged(); // 플레이어 무적 상태 진입 함수 호출
             }
+        }
+    }
+
+    // 플레이어 캐릭터 크기 확대
+    private IEnumerator Giantize(GameObject gameObject)
+    {
+        while (gameObject.transform.localScale.x < giantSize)
+        {
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x + changeSpeed
+                                                            , gameObject.transform.localScale.y + changeSpeed
+                                                            , gameObject.transform.localScale.z);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x
+                                                            , gameObject.transform.localPosition.y + changeSpeed
+                                                            , gameObject.transform.localPosition.z);
+            yield return new WaitForSeconds(0.05f); // 크기가 바뀌는 속도
+        }
+    }
+
+    // 플레이어 캐릭터 크기 축소
+    private IEnumerator Minimize(GameObject gameObject)
+    {
+        while (gameObject.transform.localScale.x > originalSize)
+        {
+            gameObject.transform.localScale = new Vector3(gameObject.transform.localScale.x - changeSpeed
+                                                            , gameObject.transform.localScale.y - changeSpeed
+                                                            , gameObject.transform.localScale.z);
+            gameObject.transform.localPosition = new Vector3(gameObject.transform.localPosition.x
+                                                            , gameObject.transform.localPosition.y - changeSpeed
+                                                            , gameObject.transform.localPosition.z);
+            yield return new WaitForSeconds(0.05f); // 크기가 바뀌는 속도
         }
     }
 }
