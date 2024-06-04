@@ -26,6 +26,7 @@ public class BackgroundScrolling : MonoBehaviour
 
     private void Update()
     {
+        _scrollSpeed = DataManager.Instance.LoadData().speed;
         ScrollBackground();
     }
     
