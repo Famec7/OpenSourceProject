@@ -25,5 +25,5 @@ public abstract class ItemEffectBase : MonoBehaviour
     /// <summary>
     /// 아이템 효과 비활성화
     /// </summary>
-    public abstract void Deactivate();
+    public abstract void Deactivate(PlayerData playerData);
 }

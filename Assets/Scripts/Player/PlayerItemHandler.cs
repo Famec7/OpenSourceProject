@@ -24,7 +24,7 @@ public class PlayerItemHandler : MonoBehaviour
     private IEnumerator IE_DeactivateItem(ItemEffectBase itemEffect)
     {
         yield return new WaitForSeconds(itemEffect.ItemData.duration);
-        itemEffect.Deactivate();
+        itemEffect.Deactivate(_data);
         _activeItems.Remove(itemEffect);
         Destroy(itemEffect.gameObject);
     }
