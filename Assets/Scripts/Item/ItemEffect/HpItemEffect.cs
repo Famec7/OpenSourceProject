@@ -14,7 +14,7 @@ public class HpItemEffect : ItemEffectBase
         StartCoroutine(IE_RecoveryHp(playerData));
     }
 
-    public override void Deactivate()
+    public override void Deactivate(PlayerData playerData)
     {
         ;
     }
