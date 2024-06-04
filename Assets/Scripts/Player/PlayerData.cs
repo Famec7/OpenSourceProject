@@ -1,3 +1,5 @@
+using UnityEngine.Events;
+
 [System.Serializable]
 public class PlayerData
 {
@@ -22,4 +24,7 @@ public class PlayerData
     public int MaxHp { get; set; }
 
     public float hp;
+
+    public UnityAction onGiantModeStart;
+    public UnityAction onGiantModeStop;
 }
