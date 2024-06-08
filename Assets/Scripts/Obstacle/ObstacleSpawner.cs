@@ -29,6 +29,8 @@ public class ObstacleSpawner : MonoBehaviour
     {
         // 장애물 종류 중 랜덤으로 선택
         int type = Random.Range(0, _obstacleTypes.Length);
+
+        Debug.Log(type);
         
         Obstacle obstacle = ObjectPoolManager.Instance.GetObject<Obstacle>(_obstacleTypes[type]);
         if (obstacle == null) return;
