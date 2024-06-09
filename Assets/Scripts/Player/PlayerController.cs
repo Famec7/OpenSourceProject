@@ -70,6 +70,7 @@ public class PlayerController : MonoBehaviour
         // 점프 입력 처리
         if (Input.GetButtonDown("Jump") && _jumpCount < _maxJumpCount)
         {
+            AudioManager.Instance.PlaySFX("Jump");
             Jump();
         }
 
