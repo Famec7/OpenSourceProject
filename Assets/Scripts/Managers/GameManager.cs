@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class GameManager : Singleton<GameManager>
 {
-    private int _score;
+    private float _score;
+    private readonly float _scorePerSecond = 1f;
 
-    public int Score
+    public float Score
     {
         get => _score;
-        set => _score = value;
+        private set => _score = value;
     }
 
 
@@ -21,5 +22,10 @@ public class GameManager : Singleton<GameManager>
     private static void Initialize()
     {
         var gameManager = Instance;
+    }
+
+    private void Update()
+    {
+        Score += _scorePerSecond * Time.deltaTime;
     }
 }
