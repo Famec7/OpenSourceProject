@@ -28,6 +28,9 @@ public class ResolutionOption : MonoBehaviour
         InitUI();
     }
 
+    /// <summary>
+    /// UI 컴포넌트에 이벤트를 등록하는 함수
+    /// </summary>
     private void InitUI()
     {
         _resolutionDropdown.onValueChanged.AddListener(ChangeResolution);
@@ -35,6 +38,10 @@ public class ResolutionOption : MonoBehaviour
         _applyButton.onClick.AddListener(OnClickApply);
     }
 
+    /// <summary>
+    /// 드롭다운에서 선택한 해상도에 따라 가로, 세로 해상도를 변경하는 함수
+    /// </summary>
+    /// <param name="index"></param>
     private void ChangeResolution(int index)
     {
         switch (index)
@@ -54,11 +61,17 @@ public class ResolutionOption : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 풀스크린 토글을 클릭했을 때 실행되는 함수
+    /// </summary>
     private void OnClickFullScreenToggle(bool isFullScreen)
     {
         this._isFullScreen = isFullScreen;
     }
 
+    /// <summary>
+    /// 적용 버튼을 클릭했을 때 실행되는 함수
+    /// </summary>
     private void OnClickApply()
     {
 #if UNITY_EDITOR
