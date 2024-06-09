@@ -10,7 +10,7 @@ public class ScoreUI : MonoBehaviour
     {
         _scoreText = GetComponent<TMP_Text>();
     }
-    
+
     private void Update()
     {
         _scoreText.text = $"{GameManager.Instance.Score:F0}";
