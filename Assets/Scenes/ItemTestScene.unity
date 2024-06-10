@@ -459,6 +459,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3727c6914f254a7680bca58fcf48257c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  backgrounds: []
 --- !u!1 &1327349800
 GameObject:
   m_ObjectHideFlags: 0
@@ -841,6 +842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpForce: 10
+  invincibleTime: 2
   slidingColliderSize: {x: 0, y: 0}
   slidingColliderOffset: {x: 0, y: 0}
 --- !u!114 &1491908774

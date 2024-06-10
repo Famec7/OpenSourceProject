@@ -28,4 +28,7 @@ public class PlayerData
     }
 
     public int maxHp;
+
+    public UnityAction onGiantModeStart;
+    public UnityAction onGiantModeStop;
 }

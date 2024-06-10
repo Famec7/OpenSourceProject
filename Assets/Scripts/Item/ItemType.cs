@@ -4,4 +4,5 @@ public enum ItemType
     Heal,
     Booster,
     Magnet,
+    Giant,
 }
