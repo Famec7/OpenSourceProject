@@ -21,11 +21,11 @@ public class HpItemEffect : ItemEffectBase
 
     private IEnumerator IE_RecoveryHp(PlayerData playerData)
     {
-        float finalHp = _hpAmount + playerData.hp;          //회복되고 난 후의 playerhp
+        float finalHp = _hpAmount + playerData.CurrentHp;          //회복되고 난 후의 playerhp
 
-        while (playerData.hp < finalHp)                     //예상 회복량까지 회복 반복
+        while (playerData.CurrentHp < finalHp)                     //예상 회복량까지 회복 반복
         {
-            playerData.hp += _recoverySpeed * Time.deltaTime;       //playerhp를 고르게 회복
+            playerData.CurrentHp += _recoverySpeed * Time.deltaTime;       //playerhp를 고르게 회복
             yield return null;
         }
     }

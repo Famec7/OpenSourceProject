@@ -1,29 +1,33 @@
-using UnityEngine.Events;
+using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 [System.Serializable]
 public class PlayerData
 {
     public float speed;
 
-    private int _hp;
-    public int Hp
+    [SerializeField]
+    private float hp;
+    public float CurrentHp
     {
-        get => _hp;
+        get => hp;
         set
         {
             if (value < 0)
             {
                 value = 0;
             }
-            else if (value > MaxHp)
+            else if (value > maxHp)
             {
-                value = MaxHp;
+                value = maxHp;
             }
+            
+            hp = value;
         }
     }
-    public int MaxHp { get; set; }
 
-    public float hp;
+    public int maxHp;
 
     public UnityAction onGiantModeStart;
     public UnityAction onGiantModeStop;

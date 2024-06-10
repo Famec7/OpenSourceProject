@@ -177,7 +177,7 @@ public class PlayerController : MonoBehaviour
             }
             else if (_isInvincible == false) // 플레이어가 현재 무적 상태가 아니라면
             {
-                _playerData.Hp -= 1; // player의 hp 감소
+                _playerData.CurrentHp -= 1; // player의 hp 감소
                 OnDamaged(); // 플레이어 무적 상태 진입 함수 호출
             }
         }
