@@ -26,7 +26,7 @@ public class PauseManager : MonoBehaviour
     /// <summary>
     /// 게임을 일시정지하는 함수 (일시정지 후 settingCanvas를 활성화)
     /// </summary>
-    public void Pause()
+    private void Pause()
     {
         Time.timeScale = 0;
         _isPaused = true;
@@ -41,5 +41,17 @@ public class PauseManager : MonoBehaviour
         Time.timeScale = 1;
         _isPaused = false;
         _settingCanvas.enabled = false;
+    }
+    
+    public void OnClickPauseButton()
+    {
+        if (_isPaused)
+        {
+            Resume();
+        }
+        else
+        {
+            Pause();
+        }
     }
 }
