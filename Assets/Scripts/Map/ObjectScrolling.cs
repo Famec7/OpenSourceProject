@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ObstacleScrolling : MonoBehaviour
+public class ObjectScrolling : MonoBehaviour
 {
     private float _scrollSpeed;
 
