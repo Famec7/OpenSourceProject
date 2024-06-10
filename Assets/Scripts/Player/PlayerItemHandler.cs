@@ -35,6 +35,7 @@ public class PlayerItemHandler : MonoBehaviour
         {
             if(other.TryGetComponent<ItemEffectBase>(out var itemEffect))
             {
+                AudioManager.Instance.PlaySFX("CollectItem"); // 아이템 획득 효과음 재생
                 UseItem(itemEffect);
                 other.gameObject.SetActive(false);
             }

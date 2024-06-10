@@ -430,6 +430,8 @@ MonoBehaviour:
   bgmClip: {fileID: 8300000, guid: 6adbb34bb3e7e7545b521a66d4aecf6a, type: 3}
   sfxClips:
   - {fileID: 8300000, guid: 068579e5ca1492e4689b98c378b2ac4a, type: 3}
+  - {fileID: 8300000, guid: d705636518692e24fbb57fdc67500c40, type: 3}
+  - {fileID: 8300000, guid: f31b7998af47f3b4cb3a993f6c8fd433, type: 3}
 --- !u!82 &1034149548
 AudioSource:
   m_ObjectHideFlags: 0
