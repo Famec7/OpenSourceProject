@@ -171,9 +171,13 @@ public class PlayerController : MonoBehaviour
         // 장애물과 충돌 시
         if (Other.gameObject.CompareTag("Obstacle"))
         {
+            if(_playerData.IsInvincible == true) // 플레이어가 무적 상태라면
+            {
+                return;
+            }
             if (_isGiant == true)   // 플레이어가 거대화 상태라면
             {
-                Other.gameObject.SetActive(false);  // 장애물 파괴
+                ObjectPoolManager.Instance.ReturnObject(Other.gameObject.GetComponent<Obstacle>());  // 장애물 파괴
             }
             else if (_isInvincible == false) // 플레이어가 현재 무적 상태가 아니라면
             {

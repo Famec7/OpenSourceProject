@@ -9,10 +9,12 @@ public class BoosterItemEffect : ItemEffectBase
     {
         _originSpeed = playerData.speed;
         playerData.speed = ((BoosterItemData)ItemData).boosterSpeed;
+        playerData.IsInvincible = true;
     }
 
     public override void Deactivate(PlayerData playerData)
     {
         playerData.speed = _originSpeed;
+        playerData.IsInvincible = false;
     }
 }

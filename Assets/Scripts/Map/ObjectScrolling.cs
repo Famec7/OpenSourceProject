@@ -12,6 +12,7 @@ public class ObjectScrolling : MonoBehaviour
     
     private void Update()
     {
+        _scrollSpeed = DataManager.Instance.LoadData().speed;
         ScrollObstacle();
     }
     
