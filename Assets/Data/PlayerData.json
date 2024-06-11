@@ -1,4 +1,5 @@
 {
+  "initialSpeed" : 5,
   "speed" : 5,
   "hp" : 100,
   "maxHp" : 100

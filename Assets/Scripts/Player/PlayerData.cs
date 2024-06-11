@@ -6,6 +6,7 @@ using UnityEngine.Serialization;
 [System.Serializable]
 public class PlayerData
 {
+    public float initialSpeed;
     public float speed;
 
     [SerializeField]
