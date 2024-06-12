@@ -30,6 +30,8 @@ public class PlayerData
     }
 
     public int maxHp;
+    
+    public bool IsInvincible { get; set; }
 
     public UnityAction onGiantModeStart;
     public UnityAction onGiantModeStop;

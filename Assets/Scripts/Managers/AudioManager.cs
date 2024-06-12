@@ -34,29 +34,29 @@ public class AudioManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        // SFX Å¬¸³À» µñ¼Å³Ê¸®¿¡ Ãß°¡
+        // SFX í´ë¦½ì„ ë”•ì…”ë„ˆë¦¬ì— ì¶”ê°€
         sfxDictionary = new Dictionary<string, AudioClip>();
         foreach (var clip in sfxClips)
         {
             sfxDictionary[clip.name] = clip;
         }
 
-        // ÃÊ±â BGM Å¬¸³ ¼³Á¤ ¹× Àç»ı
+        // ì´ˆê¸° BGM í´ë¦½ ì„¤ì • ë° ì¬ìƒ
         if (bgmClip != null)
         {
             PlayBGM();
         }
     }
 
-    // BGM Àç»ı
+    // BGM ì¬ìƒ
     public void PlayBGM()
     {
         bgmSource.clip = bgmClip;
-        bgmSource.loop = true; // ¹İº¹ Àç»ı ¼³Á¤
+        bgmSource.loop = true; // ë°˜ë³µ ì¬ìƒ ì„¤ì •
         bgmSource.Play();
     }
 
-    // SFX Àç»ı
+    // SFX ì¬ìƒ
     public void PlaySFX(string clipName)
     {
         if (sfxDictionary.TryGetValue(clipName, out var clip))
@@ -69,13 +69,13 @@ public class AudioManager : MonoBehaviour
         }
     }
 
-    // BGM º¼·ı ¼³Á¤
+    // BGM ë³¼ë¥¨ ì„¤ì •
     public void SetBGMVolume(float volume)
     {
         audioMixer.SetFloat("BGMVolume", Mathf.Log10(volume) * 20);
     }
 
-    // SFX º¼·ı ¼³Á¤
+    // SFX ë³¼ë¥¨ ì„¤ì •
     public void SetSFXVolume(float volume)
     {
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);

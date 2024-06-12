@@ -26,7 +26,6 @@ public class PlayerItemHandler : MonoBehaviour
         yield return new WaitForSeconds(itemEffect.ItemData.duration);
         itemEffect.Deactivate(_data);
         _activeItems.Remove(itemEffect);
-        Destroy(itemEffect.gameObject);
     }
     
     private void OnTriggerEnter2D(Collider2D other)
@@ -37,7 +36,7 @@ public class PlayerItemHandler : MonoBehaviour
             {
                 AudioManager.Instance.PlaySFX("CollectItem"); // 아이템 획득 효과음 재생
                 UseItem(itemEffect);
-                other.gameObject.SetActive(false);
+                ObjectPoolManager.Instance.ReturnObject(other.gameObject.GetComponent<ItemEffectBase>());
             }
         }
     }

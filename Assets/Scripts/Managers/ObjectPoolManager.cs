@@ -16,13 +16,18 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
     /// <param name="prefab"> 추가할 오브젝트 </param>
     /// <param name="count"> 추가할 오브젝트 개수 </param>
     /// <param name="parent"> 오브젝트 부모</param>
-    /// <typeparam name="Component"></typeparam>
     /// <returns></returns>
     public void CreateObjectPool(Component prefab, int count, Transform parent = null)
     {
         for (int i = 0; i < count; i++)
         {
-            Component obj = Instantiate(prefab, parent);
+            var obj = Instantiate(prefab, parent);
+            if (obj is not IPool)
+            {
+                Debug.Log(obj);
+                continue;
+            }
+
             obj.gameObject.SetActive(false);
             obj.transform.SetParent(parent);
             _objectPool.Add(obj);
