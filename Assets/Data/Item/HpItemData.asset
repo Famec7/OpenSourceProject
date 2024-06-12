@@ -16,5 +16,5 @@ MonoBehaviour:
   duration: 0
   type: 1
   _sprite: {fileID: 21300000, guid: d92b8d5c88741e64ab55041fbd724918, type: 3}
-  hpAmount: 10
+  hpAmount: 3
   recoverySpeed: 3
