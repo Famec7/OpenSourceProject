@@ -1,7 +1,8 @@
-# <center>[2024]Dragon Run 🎮</center>
+<div align="center">
+<h2>[2024]Dragon Run 🎮</h2>
 
-<center>귀여운 드래곤과 함께 동굴을 탈출하는 무한 러닝 게임 Dragon Run입니다!</center>
-<center>다양한 장애물과 아이템으로 많은 재미를 느낄 수 있도록 제작하였습니다.</center>
+<center>귀여운 드래곤과 함께 동굴을 탈출하는 무한 러닝 게임 Dragon Run입니다!<br>
+다양한 장애물과 아이템으로 많은 재미를 느낄 수 있도록 제작하였습니다.</div>
 
 ## 목차
 
@@ -11,6 +12,8 @@
 - [게임 플레이 방식](#게임-플레이-방식)
 - [환경 설정](#환경-설정)
 - [리소스 출처](#리소스-출처)
+- [개요](#개요)
+- [라이센스](#라이센스)
 
 ## 개요
 
@@ -35,8 +38,9 @@ Dragon Run은 무한 러닝 스크롤 게임으로 플레이어를 가로막는 
 ## 게임 플레이 방법
 
 - [GitHub Action](https://github.com/Famec7/OpenSourceProject/actions/workflows/main.yml)에서 빌드 자동화 배포 중
-- 최신 Release는 최상단에 있는 빌드로 배포 중
-- 압축 해제 후 OpenSourceProject.exe 실행
+- 최신 Release는 최상단에 있는 빌드로 배포 중입니다.
+- 압축 해제 후 StandaloneWindows64.exe 실행하면 플레이가 가능합니다.
+- 현재 빌드 파일은 Window만 지원합니다.
 
 ## 게임 플레이 방식
 
@@ -71,3 +75,13 @@ Dragon Run은 무한 러닝 스크롤 게임으로 플레이어를 가로막는 
 - [Unity Asset Store](https://assetstore.unity.com/?locale=ko-KR)
 - [opengameart](https://opengameart.org/)
 - [Pixabay](https://pixabay.com/ko/)
+
+## 기여
+### 가이드라인
+- 프로젝트에 기여할 시 [컨벤션](https://github.com/Famec7/OpenSourceProject/wiki/Convention)을 읽어주세요.
+### 이슈
+- 새로운 이슈를 작성할 시 help wanted나 good first issue 라벨을 달아주세요.
+
+## 라이센스
+- 이 프로젝트는 MIT 라이선스에 따라 라이선스가 부여됩니다. 자세한 내용은 [LICENSE.md](LICENSE) 파일을 참조하세요.
+
