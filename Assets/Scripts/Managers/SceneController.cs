@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public enum SceneName
 {
+    Lobby,
     InGame,
     GameOver
 }
@@ -21,6 +22,8 @@ public class SceneController : Singleton<SceneController>
         
         switch (sceneName)
         {
+            case SceneName.Lobby:
+                break;
             case SceneName.InGame:
                 GameManager.Instance.Init();
                 ObjectPoolManager.Instance.Init();
@@ -28,7 +31,6 @@ public class SceneController : Singleton<SceneController>
                 break;
             case SceneName.GameOver:
                 AudioManager.Instance.StopBGM();
-                AudioManager.Instance.PlaySFX("GameOver");
                 break;
             default:
                 break;
