@@ -3,21 +3,14 @@ using UnityEngine;
 
 public class HpItemEffect : ItemEffectBase          
 {
-    private float _hpAmount;                //HpItemÀÇ ÃÑ È¸º¹·®
-    private float _recoverySpeed;           //HpItemÀÇ ÃÊ´ç È¸º¹·®
-    private float _finalHp;                  //¿¹»ó È¸º¹·®
+    private float _hpAmount;                //HpItemì˜ ì´ íšŒë³µëŸ‰
+    private float _recoverySpeed;           //HpItemì˜ ì´ˆë‹¹ íšŒë³µëŸ‰
 
     public override void Activate(PlayerData playerData)
     {
         _hpAmount = ((HpItemData)ItemData).hpAmount;
         _recoverySpeed = ((HpItemData)ItemData).recoverySpeed;
-        ((HpItemData)ItemData).duration = _hpAmount / _recoverySpeed;   //HpItemÀÇ Áö¼Ó ½Ã°£ ¼³Á¤
-        
-        _finalHp = _hpAmount + playerData.CurrentHp;          //È¸º¹µÇ°í ³­ ÈÄÀÇ playerhp
-        if(_finalHp > playerData.maxHp)                      //È¸º¹µÇ°í ³­ ÈÄÀÇ playerhp°¡ ÃÖ´ë hpº¸´Ù Å¬ °æ¿ì
-        {
-            _finalHp = playerData.maxHp;                      //ÃÖ´ë hp·Î ¼³Á¤
-        }
+        ((HpItemData)ItemData).duration = _hpAmount / _recoverySpeed;   //HpItemì˜ ì§€ì† ì‹œê°„ ì„¤ì •
     }
 
     public override void Deactivate(PlayerData playerData)
@@ -27,6 +20,6 @@ public class HpItemEffect : ItemEffectBase
 
     public override void UpdateEffect(PlayerData playerData)
     {
-        playerData.CurrentHp += _recoverySpeed * Time.deltaTime;       //playerhp¸¦ °í¸£°Ô È¸º¹
+        playerData.CurrentHp += _recoverySpeed * Time.deltaTime;       //playerhpë¥¼ ê³ ë¥´ê²Œ íšŒë³µ
     }
 }
