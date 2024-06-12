@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-public class ObstacleScrolling : MonoBehaviour
+public class ObjectScrolling : MonoBehaviour
 {
     private float _scrollSpeed;
 
@@ -12,6 +12,7 @@ public class ObstacleScrolling : MonoBehaviour
     
     private void Update()
     {
+        _scrollSpeed = DataManager.Instance.LoadData().speed;
         ScrollObstacle();
     }
     

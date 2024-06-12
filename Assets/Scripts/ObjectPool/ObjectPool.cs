@@ -5,7 +5,7 @@ using UnityEngine;
 public class ObjectPool : MonoBehaviour
 {
     [SerializeField]
-    private List<Pool<Component>> _pools; // 오브젝트 풀 리스트
+    private List<Pool> _pools; // 오브젝트 풀 리스트
 
     private void InitPool()
     {
