@@ -42,5 +42,5 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
     }
 
     // 초기화 함수
-    protected abstract void Init();
+    public abstract void Init();
 }

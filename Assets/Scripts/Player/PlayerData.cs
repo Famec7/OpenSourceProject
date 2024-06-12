@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 
 [System.Serializable]
@@ -16,9 +17,10 @@ public class PlayerData
         get => hp;
         set
         {
-            if (value < 0)
+            if (value <= 0)
             {
                 value = 0;
+                SceneController.Instance.LoadScene(SceneName.GameOver);
             }
             else if (value > maxHp)
             {
@@ -35,4 +37,11 @@ public class PlayerData
 
     public UnityAction onGiantModeStart;
     public UnityAction onGiantModeStop;
+    
+    public void Init()
+    {
+        speed = initialSpeed;
+        CurrentHp = maxHp;
+        IsInvincible = false;
+    }
 }

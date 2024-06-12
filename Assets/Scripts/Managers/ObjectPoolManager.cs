@@ -5,9 +5,10 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
 {
     private List<Component> _objectPool;
 
-    protected override void Init()
+    public override void Init()
     {
         _objectPool = new List<Component>();
+        _objectPool.Clear();
     }
 
     /// <summary>
@@ -24,7 +25,6 @@ public class ObjectPoolManager : Singleton<ObjectPoolManager>
             var obj = Instantiate(prefab, parent);
             if (obj is not IPool)
             {
-                Debug.Log(obj);
                 continue;
             }
 

@@ -4,7 +4,8 @@ public class DataManager : Singleton<DataManager>
 {
     private readonly string _path = Application.dataPath + "/Data/PlayerData.json";
     private PlayerData _playerData = null;
-    protected override void Init()
+
+    public override void Init()
     {
         _playerData = LoadData();
     }
