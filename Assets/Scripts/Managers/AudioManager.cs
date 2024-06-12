@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : Singleton<AudioManager>
 {
-    public static AudioManager Instance;
 
     [Header("Audio Sources")]
     [SerializeField] private AudioSource bgmSource;
@@ -22,18 +21,8 @@ public class AudioManager : MonoBehaviour
 
     private Dictionary<string, AudioClip> sfxDictionary;
 
-    private void Awake()
+    public override void Init()
     {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
         // SFX 클립을 딕셔너리에 추가
         sfxDictionary = new Dictionary<string, AudioClip>();
         foreach (var clip in sfxClips)
@@ -79,5 +68,24 @@ public class AudioManager : MonoBehaviour
     public void SetSFXVolume(float volume)
     {
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
+    }
+    
+    // BGM 볼륨 반환
+    public float GetBGMVolume()
+    {
+        audioMixer.GetFloat("BGMVolume", out var volume);
+        return Mathf.Pow(10, volume / 20);
+    }
+    
+    // SFX 볼륨 반환
+    public float GetSFXVolume()
+    {
+        audioMixer.GetFloat("SFXVolume", out var volume);
+        return Mathf.Pow(10, volume / 20);
+    }
+
+    public void StopBGM()
+    {
+        bgmSource.Stop();
     }
 }

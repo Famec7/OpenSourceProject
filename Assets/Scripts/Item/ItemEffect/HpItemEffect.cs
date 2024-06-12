@@ -3,15 +3,14 @@ using UnityEngine;
 
 public class HpItemEffect : ItemEffectBase          
 {
-    private float _hpAmount;                //HpItemÀÇ ÃÑ È¸º¹·®
-    private float _recoverySpeed;           //HpItemÀÇ ÃÊ´ç È¸º¹·®
+    private float _hpAmount;                //HpItemì˜ ì´ íšŒë³µëŸ‰
+    private float _recoverySpeed;           //HpItemì˜ ì´ˆë‹¹ íšŒë³µëŸ‰
 
     public override void Activate(PlayerData playerData)
     {
         _hpAmount = ((HpItemData)ItemData).hpAmount;
         _recoverySpeed = ((HpItemData)ItemData).recoverySpeed;
-        ((HpItemData)ItemData).duration = _hpAmount / _recoverySpeed;   //HpItemÀÇ Áö¼Ó ½Ã°£ ¼³Á¤
-        StartCoroutine(IE_RecoveryHp(playerData));
+        ((HpItemData)ItemData).duration = _hpAmount / _recoverySpeed;   //HpItemì˜ ì§€ì† ì‹œê°„ ì„¤ì •
     }
 
     public override void Deactivate(PlayerData playerData)
@@ -19,14 +18,8 @@ public class HpItemEffect : ItemEffectBase
         ;
     }
 
-    private IEnumerator IE_RecoveryHp(PlayerData playerData)
+    public override void UpdateEffect(PlayerData playerData)
     {
-        float finalHp = _hpAmount + playerData.CurrentHp;          //È¸º¹µÇ°í ³­ ÈÄÀÇ playerhp
-
-        while (playerData.CurrentHp < finalHp)                     //¿¹»ó È¸º¹·®±îÁö È¸º¹ ¹İº¹
-        {
-            playerData.CurrentHp += _recoverySpeed * Time.deltaTime;       //playerhp¸¦ °í¸£°Ô È¸º¹
-            yield return null;
-        }
+        playerData.CurrentHp += _recoverySpeed * Time.deltaTime;       //playerhpë¥¼ ê³ ë¥´ê²Œ íšŒë³µ
     }
 }

@@ -4,9 +4,22 @@ public class DataManager : Singleton<DataManager>
 {
     private readonly string _path = Application.dataPath + "/Data/PlayerData.json";
     private PlayerData _playerData = null;
-    protected override void Init()
+
+    public override void Init()
     {
-        _playerData = LoadData();
+        if(System.IO.File.Exists(_path))
+            _playerData = LoadData();
+        else
+        {
+            _playerData = new PlayerData
+            {
+                initialSpeed = 5,
+                speed = 5,
+                maxHp = 30,
+                CurrentHp = 30,
+            };
+            SaveData(_playerData);
+        }
     }
     
     public void SaveData(PlayerData data)
