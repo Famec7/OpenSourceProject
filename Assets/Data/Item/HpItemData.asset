@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd113955709345a45914dd666fd5d7a2, type: 3}
   m_Name: HpItemData
   m_EditorClassIdentifier: 
-  name: 
+  name: HpItem
   duration: 0
-  type: 0
+  type: 1
   _sprite: {fileID: 21300000, guid: d92b8d5c88741e64ab55041fbd724918, type: 3}
-  hpAmount: 30
+  hpAmount: 10
   recoverySpeed: 1

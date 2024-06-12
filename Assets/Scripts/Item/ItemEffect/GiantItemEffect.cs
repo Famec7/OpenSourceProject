@@ -13,4 +13,9 @@ public class GiantItemEffect : ItemEffectBase
     {
         playerData.onGiantModeStop();
     }
+
+    public override void UpdateEffect(PlayerData playerData)
+    {
+        ;
+    }
 }

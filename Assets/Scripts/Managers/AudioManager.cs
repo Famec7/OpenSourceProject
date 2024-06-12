@@ -80,4 +80,18 @@ public class AudioManager : MonoBehaviour
     {
         audioMixer.SetFloat("SFXVolume", Mathf.Log10(volume) * 20);
     }
+    
+    // BGM 볼륨 반환
+    public float GetBGMVolume()
+    {
+        audioMixer.GetFloat("BGMVolume", out var volume);
+        return Mathf.Pow(10, volume / 20);
+    }
+    
+    // SFX 볼륨 반환
+    public float GetSFXVolume()
+    {
+        audioMixer.GetFloat("SFXVolume", out var volume);
+        return Mathf.Pow(10, volume / 20);
+    }
 }

@@ -12,7 +12,15 @@ public class PlayerItemHandler : MonoBehaviour
     {
         _data = DataManager.Instance.LoadData();
     }
-    
+
+    private void Update()
+    {
+        foreach (var item in _activeItems)
+        {
+            item.UpdateEffect(_data);
+        }
+    }
+
     private void UseItem(ItemEffectBase itemEffect)
     {
         itemEffect.Activate(_data); // 아이템 효과 활성화

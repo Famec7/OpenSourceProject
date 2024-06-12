@@ -51,6 +51,11 @@ public abstract class ItemEffectBase : MonoBehaviour, IPool
     /// 아이템 효과 비활성화
     /// </summary>
     public abstract void Deactivate(PlayerData playerData);
+    
+    /// <summary>
+    /// 지속시간 동안 호출하는 업데이트 함수
+    /// </summary>
+    public abstract void UpdateEffect(PlayerData playerData);
 
     public string Name => _name;
     public void GetFromPool()

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6f81710e85c115a4db79ae76fb903fc4, type: 3}
   m_Name: BoosterItemData
   m_EditorClassIdentifier: 
-  name: 
+  name: BoosterItem
   duration: 5
   type: 2
   _sprite: {fileID: 21300000, guid: e95c1ea151e91b546b342440541489a0, type: 3}

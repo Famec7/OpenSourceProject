@@ -14,4 +14,9 @@ public class BoosterItemEffect : ItemEffectBase
         playerData.speed = playerData.initialSpeed;
         playerData.IsInvincible = false;
     }
+
+    public override void UpdateEffect(PlayerData playerData)
+    {
+        ;
+    }
 }
