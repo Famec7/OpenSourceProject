@@ -7,7 +7,19 @@ public class DataManager : Singleton<DataManager>
 
     public override void Init()
     {
-        _playerData = LoadData();
+        if(System.IO.File.Exists(_path))
+            _playerData = LoadData();
+        else
+        {
+            _playerData = new PlayerData
+            {
+                initialSpeed = 5,
+                speed = 5,
+                maxHp = 30,
+                CurrentHp = 30,
+            };
+            SaveData(_playerData);
+        }
     }
     
     public void SaveData(PlayerData data)
